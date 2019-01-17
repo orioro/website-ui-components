@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>System</title>
+	<style type="text/css">
+		body {
+			font-family: 'Helvetica', sans-serif;
+		}
+	</style>
+</head>
+<body>
+	<div
+		id="sample-dialog"
+		data-component="dialog"
+		data-dialog-some-string="aaa"
+		data-dialog-some-number="1000"
+		data-dialog-some-boolean
+		data-dialog-some-array="value-1 value-2 value-3"
+		data-dialog-some-json='{ "name": "test", "something": "test-2" }'>
+		Sample dialog
+	</div>
+
+	<div style="display: flex; flex-direction: column;">
+		<a href="#sample-dialog">href = #sample-dialog</a>
+		<a href="http://localhost:3000/system/#sample-dialog">href = http://localhost:3000/system/#sample-dialog</a>
+		<a href="http://localhost:3000/system#sample-dialog">href = http://localhost:3000/system#sample-dialog</a>
+	</div>
+
+	<script type="text/javascript" src="index.bundle.js"></script>
+</body>
+</html>
