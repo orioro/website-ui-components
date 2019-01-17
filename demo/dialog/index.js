@@ -1,22 +1,10 @@
-import dialogComponent from '../../src/dialog'
-
-import PropTypes from 'prop-types'
-
-import { getElementProps } from '../../src/util'
+import componentSystem from '../../src/system'
+import dialog from '../../src/dialog'
 
 document.addEventListener('DOMContentLoaded', e => {
-	dialogComponent({
-		rootElement: document.querySelector('body')
-	})
+	const system = componentSystem('data-component', [
+		dialog,
+	])
 
-	console.log(getElementProps(
-		document.getElementById('sample-dialog'),
-		{
-			someString: PropTypes.string,
-			someNumber: PropTypes.number,
-		},
-		'dialog'
-	))
-
-	// console.log(dataset(document.getElementById('sample-dialog')))
+	system.initialize()
 })

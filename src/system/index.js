@@ -33,6 +33,28 @@ const instantiateComponent = (spec, system, element) => {
 		throw new Error(`${spec.componentName} instance has no handleActivation name`)
 	}
 
+	/**
+	 * Listen to action triggers within the component
+	 */
+	const componentActionDataAttribute = `data-${spec.componentName}-action`
+	delegate(element, `[${componentActionDataAttribute}]`, 'click', e => {
+		const triggerElement = e.delegateTarget
+		const actionName = triggerElement.getAttribute(componentActionDataAttribute)
+		const actionFn = instance[actionName]
+
+		if (typeof actionFn === 'function') {
+			const actionProps = typeof actionFn.propTypes === 'object' ? getElementProps(
+				triggerElement,
+				actionFn.propTypes,
+				`${spec.componentName}-action-${actionName}`
+			) : {}
+
+			actionFn(actionProps)
+		} else {
+			console.warn(`Undefined action: ${spec.componentName} - ${actionName}`)
+		}
+	})
+
 	return instance
 }
 
@@ -95,11 +117,11 @@ class ComponentSystem extends EventEmitter {
 			e.preventDefault()
 
 			const targetHref = e.delegateTarget.getAttribute('href')
+			const targetElement = getTargetElementGivenUrl(targetHref)
 
-
-
-			console.log(e.delegateTarget)
-			console.log(getTargetElementGivenUrl(targetHref))
+			if (targetElement) {
+				this.handleActivation(targetElement)
+			}
 		})
 	}
 

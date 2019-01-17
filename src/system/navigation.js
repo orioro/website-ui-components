@@ -34,7 +34,5 @@ export const getTargetElementGivenUrl = (targetUrl, baseUrl = getBaseUrl()) => {
 
 	const targetId = getUrlHash(targetUrl)
 
-	console.log('targetId', targetId)
-
 	return targetId ? document.getElementById(targetId) : null
 }

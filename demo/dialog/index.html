@@ -1,10 +1,18 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Dialog</title>
+	<title>System</title>
 	<style type="text/css">
 		body {
 			font-family: 'Helvetica', sans-serif;
+		}
+
+		.dialog {
+			display: none;
+		}
+
+		.dialog.active {
+			display: block;
 		}
 	</style>
 </head>
@@ -12,11 +20,21 @@
 	<div
 		id="sample-dialog"
 		data-component="dialog"
-		data-something="dialog something"
-		data-dialog-some-string="aaa"
-		data-dialog-some-number="1000"
-		data-dialog-some-boolean>
-		<button data-dialog-action="dismiss">Fechar</button>
+		data-dialog-active-class="active"
+		class="dialog">
+		Sample dialog
+
+		<button
+			data-dialog-action="dismiss"
+			data-dialog-action-dismiss-delay="100">
+			Dismiss
+		</button>
+	</div>
+
+	<div style="display: flex; flex-direction: column;">
+		<a href="#sample-dialog">href = #sample-dialog</a>
+		<a href="http://localhost:3000/dialog/#sample-dialog">href = http://localhost:3000/dialog/#sample-dialog</a>
+		<a href="http://localhost:3000/dialog#sample-dialog">href = http://localhost:3000/dialog#sample-dialog</a>
 	</div>
 
 	<script type="text/javascript" src="index.bundle.js"></script>
