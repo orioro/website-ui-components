@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Scroll target</title>
+	<style type="text/css">
+		body {
+			font-family: 'Helvetica', sans-serif;
+			margin: 0;
+		}
+
+		nav {
+			position: fixed;
+			right: 0;
+
+			display: flex;
+			flex-direction: column;
+
+			background-color: white;
+
+			width: 300px;
+		}
+
+		nav.focus {
+			background-color: navy;
+			color: white;
+		}
+
+		nav.custom-focus-class::before {
+			content: 'custom-focus-class!';
+			background-color: navy;
+			color: white;
+			display: block;
+			padding: 20px;
+		}
+
+		nav > a {
+			padding: 20px;
+			display: block;
+			color: currentColor;
+		}
+
+		nav > a.focus::after {
+			content: ' FOCUSED!'
+		}
+
+		nav > a.custom-focus-class::after {
+			content: ' CUSTOM!'
+		}
+
+		section {
+			height: 70vh;
+			padding: 40px;
+			box-sizing: border-box;
+
+			transition: background-color 1s ease;
+		}
+
+		section > h2 {
+			margin: 0;
+			font-weight: normal;
+		}
+
+		section:nth-child(odd) {
+			background-color: skyblue;
+		}
+
+		section:nth-child(even) {
+			background-color: magenta;
+		}
+
+		section::after {
+			content: ' normal';
+		}
+
+		section.active:nth-child(odd) {
+			background-color: darkred;
+			color: white;
+		}
+
+		section.active:nth-child(even) {
+			background-color: navy;
+			color: white;
+		}
+
+		section.active::after {
+			content: ' ACTIVE!';
+		}
+
+		h2.active {
+			color: white;
+		}
+
+		h2.active::after {
+			content: ' ACTIVE!';
+		}
+	</style>
+</head>
+<body>
+	<nav id="navigation">
+		<a href="#section-1">section-1</a>
+		<a href="#section-2">section-2</a>
+		<a href="#section-3">section-3</a>
+		<a href="#heading-section-4">heading-section-4</a>
+		<a href="#section-5">section-5</a>
+		<a href="#section-6">section-6</a>
+		<a href="#section-7">section-7</a>
+		<a href="#section-8">section-8</a>
+		<a href="#section-9">section-9</a>
+		<a href="#section-10">section-10</a>
+	</nav>
+
+	<section
+		id="section-1"
+		data-component="scroll-target">
+		<h2>Section 1</h2>
+		
+	</section>
+	<section
+		id="section-2"
+		data-component="scroll-target"
+		data-scroll-target-related="#navigation">
+		<h2>Section 2</h2>
+		
+	</section>
+	<section
+		id="section-3"
+		data-component="scroll-target"
+		data-scroll-target-top-boundary="0.5"
+		data-scroll-target-bottom-boundary="0.5">
+		<h2>Section 3</h2>
+		
+	</section>
+	<section>
+		<h2
+			id="heading-section-4"
+			data-component="scroll-target"
+			data-scroll-target-top-boundary="0.2"
+			data-scroll-target-bottom-boundary="0.4">Section 4</h2>
+		
+	</section>
+	<section
+		id="section-5"
+		data-component="scroll-target">
+		<h2
+			data-component="scroll-target"
+			data-scroll-target-top-boundary="0.2"
+			data-scroll-target-prevent-leave>Section 5</h2>
+		
+	</section>
+	<section
+		id="section-6"
+		data-component="scroll-target"
+		data-scroll-target-top-boundary="0.2"
+		data-scroll-target-prevent-leave>
+		<h2>Section 6</h2>
+		
+	</section>
+	<section
+		id="section-7"
+		data-component="scroll-target">
+		<h2>Section 7</h2>
+		
+	</section>
+	<section
+		id="section-8"
+		data-component="scroll-target">
+		<h2>Section 8</h2>
+		
+	</section>
+	<section
+		id="section-9"
+		data-component="scroll-target"
+		data-scroll-target-related="#navigation"
+		data-scroll-target-related-focus-class="custom-focus-class">
+		<h2>Section 9</h2>
+		
+	</section>
+	<section
+		id="section-10"
+		data-component="scroll-target">
+		<h2>Section 10</h2>
+		
+	</section>
+	<script type="text/javascript" src="index.bundle.js"></script>
+</body>
+</html>

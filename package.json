@@ -29,10 +29,12 @@
     "rollup-plugin-node-resolve": "^3.4.0"
   },
   "dependencies": {
+    "animated-scroll-to": "^1.2.2",
     "camelcase": "^5.0.0",
     "decamelize": "^2.0.0",
     "delegate": "^3.2.0",
     "element-closest": "^3.0.0",
+    "lodash.defaults": "^4.2.0",
     "prop-types": "^15.6.2"
   }
 }

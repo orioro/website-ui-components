@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>System</title>
+	<style type="text/css">
+		body {
+			font-family: 'Helvetica', sans-serif;
+		}
+	</style>
+</head>
+<body>
+	<div
+		id="example-component-instance"
+		data-component="example">
+		Example
+
+		<div>
+			<h2>
+				Button triggers (inner)
+			</h2>
+			<button
+				data-component="trigger">
+				defaultAction
+			</button>
+
+			<button
+				data-component="trigger"
+				data-trigger-action="action1"
+				data-trigger-action-args='["arg 1", "arg 2"]'>
+				action1
+			</button>
+
+			<button
+				data-component="trigger"
+				data-trigger-action="action1">
+				action1 - no args
+			</button>
+
+			<button
+				data-component="trigger"
+				data-trigger-action="action2"
+				data-trigger-action-args='["arg 1", "arg 2"]'>
+				action2
+			</button>
+
+			<button
+				data-component="trigger"
+				data-trigger-action="action2">
+				action2 - no args
+			</button>
+		</div>
+	</div>
+
+	<div style="display: flex; flex-direction: column;">
+		<h2>
+			Navigation triggers
+		</h2>
+		<a href="#example-component-instance">href = #example-component-instance</a>
+		<a href="http://localhost:3000/trigger/#example-component-instance">href = http://localhost:3000/trigger/#example-component-instance</a>
+		<a href="http://localhost:3000/trigger#example-component-instance">href = http://localhost:3000/trigger#example-component-instance</a>
+	</div>
+
+	<div>
+		<h2>
+			Button triggers (outer)
+		</h2>
+		<button
+			data-component="trigger"
+			data-trigger-target="#example-component-instance">
+			defaultAction
+		</button>
+
+		<button
+			data-component="trigger"
+			data-trigger-target="#example-component-instance"
+			data-trigger-component="example"
+			data-trigger-action="action1"
+			data-trigger-action-args='["arg 1", "arg 2"]'>
+			action1
+		</button>
+
+		<button
+			data-component="trigger"
+			data-trigger-target="#example-component-instance"
+			data-trigger-component="example"
+			data-trigger-action="action1">
+			action1 - no args
+		</button>
+
+		<button
+			data-component="trigger"
+			data-trigger-target="#example-component-instance"
+			data-trigger-component="example"
+			data-trigger-action="action2"
+			data-trigger-action-args='["arg 1", "arg 2"]'>
+			action2
+		</button>
+
+		<button
+			data-component="trigger"
+			data-trigger-target="#example-component-instance"
+			data-trigger-component="example"
+			data-trigger-action="action2">
+			action2 - no args
+		</button>
+	</div>
+
+	<script type="text/javascript" src="index.bundle.js"></script>
+</body>
+</html>

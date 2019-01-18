@@ -6,7 +6,7 @@ export const coerceValue = (targetPropType, value) => {
 	switch (targetPropType) {
 		case PropTypes.array:
 		case PropTypes.array.isRequired:
-			return value ? value.split(/\s+/) : undefined
+			return value ? JSON.parse(value) : undefined
 		case PropTypes.bool:
 		case PropTypes.bool.isRequired:
 			return Boolean(value)
@@ -31,39 +31,39 @@ export const coerceValue = (targetPropType, value) => {
 	}
 }
 
-export const getElementProps = (element, elementPropTypes, componentName, validate = true) => {
+export const getElementProps = (element, elementPropTypes, namespace, validate = true) => {
 	const props = Object.keys(elementPropTypes).reduce((acc, property) => {
 		const targetPropType = elementPropTypes[property]
 		return {
 			...acc,
 			[property]: coerceValue(
 				targetPropType,
-				getElementDataProperty(element, targetPropType, property, componentName)
+				getElementDataProperty(element, targetPropType, property, namespace)
 			)
 		}
 	}, {})
 
 	if (validate) {
-		PropTypes.checkPropTypes(elementPropTypes, props, 'prop', componentName)
+		PropTypes.checkPropTypes(elementPropTypes, props, 'prop', namespace)
 	}
 
 	return props
 }
 
-const convertToDataAttributeName = (property, prefix = null)  => {
-	return prefix ? 
-		`data-${decamelize(prefix, '-')}-${decamelize(property, '-')}` :
+const convertToDataAttributeName = (property, namespace = null)  => {
+	return namespace ? 
+		`data-${decamelize(namespace, '-')}-${decamelize(property, '-')}` :
 		`data-${decamelize(property, '-')}`
 }
 
-const getElementDataProperty = (element, targetPropType, property, prefix = null) => {
+const getElementDataProperty = (element, targetPropType, property, namespace = null) => {
 	if (targetPropType === PropTypes.bool ||
 			targetPropType === PropTypes.bool.isRequired) {
 		// Boolean
-		return element.hasAttribute(convertToDataAttributeName(property, prefix))
+		return element.hasAttribute(convertToDataAttributeName(property, namespace))
 	} else {
 		return element.dataset ?
-			element.dataset[prefix ? camelcase(`${prefix}-${property}`) : property] :
-			element.getAttribute(convertToDataAttributeName(property, prefix))
+			element.dataset[namespace ? camelcase(`${namespace}-${property}`) : property] :
+			element.getAttribute(convertToDataAttributeName(property, namespace))
 	}
 }

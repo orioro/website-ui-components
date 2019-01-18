@@ -1,38 +1,22 @@
-const PURE_HASH_URL_RE = /^#/
-const HASH_CAPTURE_RE = /#([^#]+)$/
-const TRAILING_SLASH_RE = /\/$/
+import delegate from 'delegate'
 
-const getBaseUrl = () => {
-	return window.location.origin + window.location.pathname + window.location.search
-}
+/**
+ * Initializes hash navigation tracking
+ */
+export const initializeHashNavigationTracking = (system, rootElement) => {
+	delegate(rootElement, 'a', 'click', e => {
+		const targetUrl = e.delegateTarget.getAttribute('href')
+		const handled = system.navHandleNavigation(targetUrl)
 
-const getAnchorSelector = targetId => {
-	const hash = `#${targetId}`
+		if (handled) {
+			e.preventDefault()
+			system.navHistoryPushState(targetUrl)
+		}
+	})
 
-	return `a[href=${hash}"], a[href="${getBaseUrl()}${hash}"]`
-}
+	window.addEventListener('popstate', () => {
+		system.navHandleNavigation(window.location.href)
+	})
 
-const getUrlHash = url => {
-	const match = url.match(HASH_CAPTURE_RE)
-
-	return match ? match[1] : null
-}
-
-const isPureHashUrl = url => {
-	return PURE_HASH_URL_RE.test(url)
-}
-
-export const getTargetElementGivenUrl = (targetUrl, baseUrl = getBaseUrl()) => {
-	if (!targetUrl) {
-		throw new Error('targetUrl is required')
-	}
-
-	if (!isPureHashUrl(targetUrl) &&
-			!targetUrl.startsWith(baseUrl.replace(TRAILING_SLASH_RE, ''))) {
-		return null
-	}
-
-	const targetId = getUrlHash(targetUrl)
-
-	return targetId ? document.getElementById(targetId) : null
+	system.navHandleNavigation(window.location.href)
 }

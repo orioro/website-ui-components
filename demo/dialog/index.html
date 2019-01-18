@@ -25,16 +25,43 @@
 		Sample dialog
 
 		<button
-			data-dialog-action="dismiss"
-			data-dialog-action-dismiss-delay="100">
+			data-component="trigger"
+			data-trigger-component-name="dialog"
+			data-trigger-action="dismiss">
 			Dismiss
 		</button>
 	</div>
 
 	<div style="display: flex; flex-direction: column;">
+		<h2>
+			Dialog link control
+		</h2>
 		<a href="#sample-dialog">href = #sample-dialog</a>
 		<a href="http://localhost:3000/dialog/#sample-dialog">href = http://localhost:3000/dialog/#sample-dialog</a>
 		<a href="http://localhost:3000/dialog#sample-dialog">href = http://localhost:3000/dialog#sample-dialog</a>
+	</div>
+
+	<div>
+		<h2>Dialog outside control</h2>
+		<button
+			data-component="trigger"
+			data-trigger-target="#sample-dialog">
+			Open dialog (implicit)
+		</button>
+
+		<button
+			data-component="trigger"
+			data-trigger-target="#sample-dialog"
+			data-trigger-action="open">
+			Open dialog (explicitly defined)
+		</button>
+
+		<button
+			data-component="trigger"
+			data-trigger-target="#sample-dialog"
+			data-trigger-action="dismiss">
+			Dismiss dialog
+		</button>
 	</div>
 
 	<script type="text/javascript" src="index.bundle.js"></script>
