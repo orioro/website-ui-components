@@ -3,6 +3,8 @@ const path = require('path')
 const resolve = require('rollup-plugin-node-resolve')
 const commonjs = require('rollup-plugin-commonjs')
 const babel = require('rollup-plugin-babel')
+const builtins = require('rollup-plugin-node-builtins')
+const globals = require('rollup-plugin-node-globals')
 
 module.exports = {
 	input: 'src/index.js',
@@ -14,11 +16,12 @@ module.exports = {
 	},
 	external: Object.keys(require('../package.json').dependencies || {}),
 	plugins: [
-		babel({
-			babelrc: true,
-			exclude: 'node_modules/**'
-		}),
 		resolve(),
 		commonjs(),
+		babel({
+			exclude: 'node_modules/**'
+		}),
+		builtins(),
+		globals(),
 	]
 }
