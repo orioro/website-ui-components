@@ -14,7 +14,7 @@ module.exports = {
 		format: 'cjs',
 		exports: 'named',
 	},
-	external: Object.keys(require('../package.json').dependencies || {}),
+	// external: Object.keys(require('../package.json').dependencies || {}),
 	plugins: [
 		resolve(),
 		commonjs(),
