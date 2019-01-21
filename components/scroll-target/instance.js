@@ -67,6 +67,7 @@ export const createInstance = (options, system, componentRoot, props) => {
 		isActive: false,
 		isFocused: false,
 		progress: 0,
+		previousProgress: -1,
 	}
 
 	const componentIdAttribute = componentRoot.getAttribute('id')
@@ -89,7 +90,10 @@ export const createInstance = (options, system, componentRoot, props) => {
 			componentRoot.classList.add(activeClass)
 			componentRoot.classList.add(enterClass)
 
-			onEnter(instance)
+			onEnter(
+				instance,
+				instance.progress > instance.previousProgress ? 1 : -1
+			)
 		}
 	}
 
@@ -104,14 +108,24 @@ export const createInstance = (options, system, componentRoot, props) => {
 			componentRoot.classList.remove(enterClass)
 			componentRoot.classList.add(leaveClass)
 
-			onLeave(instance)
+			onLeave(
+				instance,
+				instance.progress > instance.previousProgress ? 1 : -1
+			)
 		}
 	}
 
 	const handleProgress = progress => {
 		if (progress !== instance.progress) {
-			onProgress(instance, progress, instance.progress)
+			instance.previousProgress = instance.progress
 			instance.progress = progress
+
+			onProgress(
+				instance,
+				instance.progress,
+				instance.progress > instance.previousProgress ? 1 : -1,
+				instance.previousProgress
+			)
 		}
 	}
 

@@ -77,7 +77,7 @@ const initialize = ({
 
 export default options => {
 	return {
-		componentName: SCROLL_TARGET_COMPONENT_NAME,
+		componentName: options.componentName || SCROLL_TARGET_COMPONENT_NAME,
 		initialize: initialize.bind(null, options),
 		createInstance: createInstance.bind(null, options),
 		instancePropTypes,
