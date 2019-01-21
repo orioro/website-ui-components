@@ -6631,6 +6631,10 @@ function (_EventEmitter) {
   return ComponentSystem;
 }(EventEmitter);
 
+var system = (function (namespace, specs) {
+  return new ComponentSystem(namespace, specs);
+});
+
 var DIALOG_COMPONENT_NAME = 'dialog';
 
 var createInstance = function createInstance(system, componentRoot) {
@@ -7681,7 +7685,8 @@ var initialize = function initialize(_ref, system) {
   system.on('ready', updateScrollData);
 };
 
-var scrollTarget = (function (options) {
+var scrollTarget = (function () {
+  var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
   return {
     componentName: options.componentName || SCROLL_TARGET_COMPONENT_NAME,
     initialize: initialize.bind(null, options),
@@ -7693,7 +7698,7 @@ var scrollTarget = (function (options) {
 var createSystem = function createSystem() {
   var namespace = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'component';
   var components = arguments.length > 1 ? arguments[1] : undefined;
-  return componentSystem(namespace, [dialog(), tabs(), trigger(), scrollTarget()].concat(_toConsumableArray(components)));
+  return system(namespace, [dialog(), tabs(), trigger(), scrollTarget()].concat(_toConsumableArray(components)));
 };
 
 exports.default = createSystem;

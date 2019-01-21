@@ -75,7 +75,7 @@ const initialize = ({
 	system.on('ready', updateScrollData)
 }
 
-export default options => {
+export default (options = {}) => {
 	return {
 		componentName: options.componentName || SCROLL_TARGET_COMPONENT_NAME,
 		initialize: initialize.bind(null, options),

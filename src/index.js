@@ -5,7 +5,7 @@ import trigger from '../components/trigger'
 import scrollTarget from '../components/scroll-target'
 
 const createSystem = (namespace = 'component', components) => {
-	return componentSystem(namespace, [
+	return system(namespace, [
 		dialog(),
 		tabs(),
 		trigger(),
