@@ -36,6 +36,9 @@ const createInstance = (system, componentRoot, {
 		})
 	}
 
+	// Activate the first tab by default
+	activateTab(tabContainers[0].getAttribute('id'))
+
 	return {
 		defaultAction: (targetElement) => {
 			activateTab(targetElement.getAttribute('id'))
