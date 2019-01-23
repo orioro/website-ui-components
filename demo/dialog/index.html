@@ -9,10 +9,17 @@
 
 		.dialog {
 			display: none;
+
+			padding: 100px;
+			background-color: magenta;
 		}
 
 		.dialog.active {
 			display: block;
+		}
+
+		.dialog__contents {
+			background-color: white;
 		}
 	</style>
 </head>
@@ -22,13 +29,23 @@
 		data-component="dialog"
 		data-dialog-active-class="active"
 		class="dialog">
-		Sample dialog
+
+		<div class="dialog__contents">
+			Sample dialog contents
+		</div>
 
 		<button
 			data-component="trigger"
 			data-trigger-component-name="dialog"
 			data-trigger-action="dismiss">
 			Dismiss
+		</button>
+
+		<button
+			data-component="trigger"
+			data-trigger-component-name="dialog"
+			data-trigger-action="someOtherAction">
+			someOtherAction
 		</button>
 	</div>
 

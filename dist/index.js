@@ -6642,11 +6642,18 @@ var createInstance = function createInstance(system, componentRoot) {
       _ref$activeClass = _ref.activeClass,
       activeClass = _ref$activeClass === void 0 ? 'active' : _ref$activeClass,
       _ref$navigatable = _ref.navigatable,
-      navigatable = _ref$navigatable === void 0 ? false : _ref$navigatable;
+      navigatable = _ref$navigatable === void 0 ? false : _ref$navigatable,
+      _ref$preventMovingToB = _ref.preventMovingToBody,
+      preventMovingToBody = _ref$preventMovingToB === void 0 ? false : _ref$preventMovingToB;
 
   var state = {
     active: false
   };
+
+  if (!preventMovingToBody) {
+    componentRoot.remove();
+    document.querySelector('body').appendChild(componentRoot);
+  }
 
   var open = function open() {
     if (!state.active) {
@@ -6673,6 +6680,11 @@ var createInstance = function createInstance(system, componentRoot) {
     close();
   };
 
+  componentRoot.addEventListener('click', function (e) {
+    if (e.target === componentRoot) {
+      dismiss();
+    }
+  });
   return {
     state: state,
     open: open,
@@ -6687,7 +6699,8 @@ var dialog = (function () {
     componentName: DIALOG_COMPONENT_NAME,
     instancePropTypes: {
       activeClass: propTypes.string,
-      navigatable: propTypes.bool
+      navigatable: propTypes.bool,
+      preventMovingToBody: propTypes.bool
     },
     createInstance: createInstance
   };

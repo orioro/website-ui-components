@@ -5,10 +5,16 @@ const DIALOG_COMPONENT_NAME = 'dialog'
 
 const createInstance = (system, componentRoot, {
 	activeClass = 'active',
-	navigatable = false
+	navigatable = false,
+	preventMovingToBody = false
 } = {}) => {
 	const state = {
 		active: false
+	}
+
+	if (!preventMovingToBody) {
+		componentRoot.remove()
+		document.querySelector('body').appendChild(componentRoot)
 	}
 
 	const open = () => {
@@ -37,6 +43,12 @@ const createInstance = (system, componentRoot, {
 		close()
 	}
 
+	componentRoot.addEventListener('click', e => {
+		if (e.target === componentRoot) {
+			dismiss()
+		}
+	})
+
 	return {
 		state,
 		open,
@@ -52,6 +64,7 @@ export default () => {
 		instancePropTypes: {
 			activeClass: PropTypes.string,
 			navigatable: PropTypes.bool,
+			preventMovingToBody: PropTypes.bool,
 		},
 		createInstance,
 	}
