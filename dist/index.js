@@ -1067,7 +1067,7 @@ var ReactPropTypesSecret_1 = ReactPropTypesSecret;
 
 var printWarning = function() {};
 
-if (process.env.NODE_ENV !== 'production') {
+{
   var ReactPropTypesSecret$1 = ReactPropTypesSecret_1;
   var loggedTypeFailures = {};
 
@@ -1097,7 +1097,7 @@ if (process.env.NODE_ENV !== 'production') {
  * @private
  */
 function checkPropTypes(typeSpecs, values, location, componentName, getStack) {
-  if (process.env.NODE_ENV !== 'production') {
+  {
     for (var typeSpecName in typeSpecs) {
       if (typeSpecs.hasOwnProperty(typeSpecName)) {
         var error;
@@ -8047,7 +8047,9 @@ var createInstance$3 = function createInstance(options, system, componentRoot, p
       focusPosition = _defaults.focusPosition,
       preventLeave = _defaults.preventLeave,
       related = _defaults.related,
-      relatedFocusClass = _defaults.relatedFocusClass;
+      relatedFocusClass = _defaults.relatedFocusClass,
+      _defaults$navigatable = _defaults.navigatable,
+      navigatable = _defaults$navigatable === void 0 ? false : _defaults$navigatable;
 
   var instance = {
     isActive: false,
@@ -8105,7 +8107,7 @@ var createInstance$3 = function createInstance(options, system, componentRoot, p
         relatedElement.classList.add(relatedFocusClass);
       });
 
-      if (componentIdAttribute && componentIdAttribute !== system.navHistoryGetCurrentHash()) {
+      if (navigatable && componentIdAttribute && componentIdAttribute !== system.navHistoryGetCurrentHash()) {
         system.navHistoryReplaceState("#".concat(componentIdAttribute));
       }
 

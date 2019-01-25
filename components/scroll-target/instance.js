@@ -61,6 +61,8 @@ export const createInstance = (options, system, componentRoot, props) => {
 
 		related,
 		relatedFocusClass,
+
+		navigatable = false,
 	} = defaults(props, options, DEFAULTS)
 
 	const instance = {
@@ -140,7 +142,8 @@ export const createInstance = (options, system, componentRoot, props) => {
 				relatedElement.classList.add(relatedFocusClass)
 			})
 
-			if (componentIdAttribute &&
+			if (navigatable &&
+					componentIdAttribute &&
 					componentIdAttribute !== system.navHistoryGetCurrentHash()) {
 				system.navHistoryReplaceState(`#${componentIdAttribute}`)
 			}
